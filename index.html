@@ -1,0 +1,88 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Hue Are You?</title>
+  <meta name="description" content="Find your color season and the colors that suit you best.">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,500;9..144,700&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <main>
+    <!-- Intro -->
+    <section id="intro" class="screen active">
+      <div class="hero-swatches" aria-hidden="true">
+        <span style="--c:#FF9F80"></span><span style="--c:#B0C4DE"></span>
+        <span style="--c:#CC5500"></span><span style="--c:#0047AB"></span>
+      </div>
+      <h1>Hue Are You?</h1>
+      <p class="lede">Answer 11 quick questions to find your color season and the shades that make you glow.</p>
+      <button class="btn primary" id="start">Start the quiz</button>
+      <p class="fine">Tip: answer in natural daylight, without makeup if you can.</p>
+    </section>
+
+    <!-- Quiz -->
+    <section id="quiz" class="screen">
+      <div class="progress"><div class="bar" id="bar"></div></div>
+      <p class="step" id="step"></p>
+      <h2 id="q-title"></h2>
+      <p class="hint" id="q-hint"></p>
+      <div class="options" id="options"></div>
+      <button class="btn ghost" id="back">← Back</button>
+    </section>
+
+    <!-- Result -->
+    <section id="result" class="screen">
+      <p class="eyebrow">You're a</p>
+      <h1 id="r-name"></h1>
+      <p class="tagline" id="r-tagline"></p>
+      <p id="r-desc"></p>
+
+      <div id="axes" class="axes"></div>
+      <p id="runner-up" class="runner-up"></p>
+
+      <h3>Your palette <span class="sub">tap a swatch to copy its hex</span></h3>
+      <div class="palette" id="palette"></div>
+
+      <div class="facts">
+        <div><h4>Neutrals</h4><p id="r-neutrals"></p></div>
+        <div><h4>Metals</h4><p id="r-metals"></p></div>
+        <div><h4>Lips</h4><p id="r-lips"></p></div>
+      </div>
+
+      <h3>Colors to skip</h3>
+      <div class="palette small" id="avoid"></div>
+
+      <h3>Try the drape test</h3>
+      <p class="sub-p">Add a selfie and click through colors to see how each one looks next to your face. Your photo stays on your device and is never uploaded.</p>
+      <div class="drape">
+        <div class="mirror" id="mirror">
+          <img id="selfie" alt="">
+          <span id="placeholder">Add a photo</span>
+        </div>
+        <div class="drape-controls">
+          <label class="btn">Choose photo<input type="file" id="photo" accept="image/*" hidden></label>
+          <div class="toggle">
+            <button class="chip on" data-set="palette">Best colors</button>
+            <button class="chip" data-set="avoid">Skip colors</button>
+          </div>
+          <div class="palette mini" id="drape-swatches"></div>
+        </div>
+      </div>
+
+      <div class="actions">
+        <button class="btn primary" id="download">Download palette</button>
+        <button class="btn" id="share">Copy share link</button>
+        <button class="btn ghost" id="restart">Retake quiz</button>
+      </div>
+    </section>
+  </main>
+
+  <div class="toast" id="toast" role="status"></div>
+
+  <script src="data.js"></script>
+  <script src="app.js"></script>
+</body>
+</html>
