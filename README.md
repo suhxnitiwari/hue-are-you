@@ -2,6 +2,8 @@
 
 Find your color season and the colors that suit you best.
 
+**[Take the quiz →](https://suhxnitiwari.github.io/hue-are-you/)**
+
 Answer 11 quick questions about your undertone, hair, eyes and contrast. You'll get one of the 12 color seasons, plus a palette you can use when shopping.
 
 ## Features
