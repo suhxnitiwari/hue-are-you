@@ -1,43 +1,53 @@
-# Hue Are You? 🎨
+# Hue Are You?
 
-Find your color season and the colors that suit you best.
+*Find your color season and the colors that suit you best.*
 
-**[Take the quiz →](https://suhxnitiwari.github.io/hue-are-you/)**
+**Live:** [Take the quiz →](https://suhxnitiwari.github.io/hue-are-you/)
 
-Answer 11 quick questions about your undertone, hair, eyes and contrast. You'll get one of the 12 color seasons, plus a palette you can use when shopping.
+## What it is
 
-## Features
+Answer 11 quick questions about your undertone, hair, eyes and contrast, and you'll land in one of the 12 color seasons with a palette you can actually shop with.
 
-- **11-question quiz** that scores you on three axes: cool ↔ warm, deep ↔ light, soft ↔ bright
-- **12 seasons**, each with a 20-color palette, colors to skip, and suggested neutrals, metals and lip shades
-- **Close-call detection**: if you fall between two seasons, it tells you
-- **Drape test**: add a selfie and click through colors to see how each one looks next to your face
-- **Download your palette** as a shareable PNG
-- **Share links**: `#soft-autumn` opens that season's page directly
+- **12 seasons,** each with a 20-color palette, colors to skip, and suggested neutrals, metals and lip shades. Tap any swatch to copy its hex code.
+- **Close-call detection:** if you sit between two seasons, it tells you and suggests trying both.
+- **Drape test:** add a selfie and click through colors to see each one next to your face, the way a color analyst holds fabric up to you.
+- **Download your palette** as a 1080×1350 PNG sized for sharing.
+- **Share links:** `#soft-autumn` opens that season's page directly.
 
-## Privacy
+## How it's built
 
-Everything runs in your browser. There's no backend, no tracking, and your selfie is **never uploaded**. It's displayed with a local object URL and goes away when you close the tab.
+**Scoring as a point in 3D space.** Every answer adds points on three axes: cool ↔ warm, deep ↔ light, and soft ↔ bright. Each axis total is scaled into a −1 to 1 range (dividing by half the maximum possible score, since real answers rarely all point the same way). Each of the 12 seasons has a target point in that same space, and the quiz ranks every season by weighted Euclidean distance from you. Temperature carries 1.2× weight because it's the main split between seasons. If the runner-up is within 0.25 of the winner, you get the close-call note.
 
-## Inclusivity
+**Rendered in the browser.** The downloadable palette is drawn on a Canvas with rounded swatches and hex labels. Swatch label color is picked automatically from each color's perceived brightness (weighted RGB), so the text stays readable on light and dark swatches alike.
 
-The traditional season system was built mostly around lighter skin tones. This quiz gives skin depth only a small weight. Undertone, hair, eyes and contrast drive the result, so people with any skin depth can land in any season.
+**Private by default.** There's no backend and no tracking. The drape-test selfie is shown through a local object URL, is never uploaded, and is gone when you close the tab.
 
-## How the scoring works
+## Design choices
 
-Every answer adds points on the three axes. The totals are scaled to a −1 to 1 range, and each season has a target point in that 3D space (see `SEASONS` in `data.js`). Your result is the season closest to you. Temperature gets a little extra weight because it's the main split between seasons.
+- **Built to include every skin tone.** The traditional season system was built mostly around lighter skin. Here skin depth gets only a small weight, and the quiz says so on that question. Undertone, hair, eyes and contrast drive the result, so people of any skin depth can land in any season.
+- Questions use everyday tests instead of jargon: which jewelry flatters you, what the sun does to your skin, how much contrast you'd see in a black-and-white photo.
+- Fraunces and Inter type, a warm off-white background, and light and dark mode.
 
-## Run it
+## Tech stack
 
-It's plain HTML, CSS and JS with no build step. Open `index.html` directly, or serve the folder:
+HTML, CSS, vanilla JavaScript, Canvas API, GitHub Pages. No framework and no build step.
+
+## Run it locally
+
+Open `index.html` directly, or serve the folder:
 
 ```bash
 python3 -m http.server 8000
 ```
 
-## Deploy
+## Project structure
 
-Push to GitHub, then go to **Settings → Pages → Deploy from branch → `main` / root**.
+```
+index.html   page layout
+style.css    styles (light and dark mode)
+data.js      quiz questions and season palettes, including each season's target point
+app.js       quiz flow, scoring, results, drape test, PNG export
+```
 
 ## Roadmap
 
@@ -46,11 +56,4 @@ Push to GitHub, then go to **Settings → Pages → Deploy from branch → `main
 - [ ] Outfit and makeup inspiration for each season
 - [ ] Test the quiz with people of many skin tones and tune the weights
 
-## Project structure
-
-```
-index.html   page layout
-style.css    styles (supports light and dark mode)
-data.js      quiz questions and season palettes
-app.js       quiz flow, scoring, results, drape test, PNG export
-```
+Built by [Suhani Tiwari](https://suhanitiwari.com).
